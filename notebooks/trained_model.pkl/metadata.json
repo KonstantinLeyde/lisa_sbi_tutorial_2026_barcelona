@@ -1,0 +1,24 @@
+{
+  "config": {
+    "ts_length": 256,
+    "embedding_dim": 32,
+    "param_dim": 2,
+    "mlp_width": 64,
+    "mlp_depth": 3,
+    "flow_layers": 6,
+    "nn_width": 64,
+    "nn_depth": 4
+  },
+  "param_names": [
+    "log10_distance_mpc",
+    "log10_mass"
+  ],
+  "param_mean": [
+    5.008248881298222,
+    1.9903871796449744
+  ],
+  "param_std": [
+    0.5647338368571577,
+    0.5591052538721032
+  ]
+}
