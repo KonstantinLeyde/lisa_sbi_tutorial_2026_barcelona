@@ -9,7 +9,7 @@ import equinox as eqx
 import jax
 import jax.numpy as jnp
 import jax.random as jr
-from flowjax.bijections import Affine
+from flowjax.bijections import Affine, RationalQuadraticSpline
 from flowjax.distributions import Normal
 from flowjax.flows import coupling_flow
 
@@ -116,6 +116,7 @@ def make_model(
     param_mean: jax.Array | None = None,
     param_std: jax.Array | None = None,
     param_names: Sequence[str] = (),
+    transformer: eqx.Module = Affine(),
 ) -> EmbeddingFlow:
     _, embedding_key, flow_key = jr.split(key, 3)
     config = ModelConfig(
@@ -140,7 +141,7 @@ def make_model(
     flow = coupling_flow(
         flow_key,
         base_dist=Normal(jnp.zeros(config.param_dim)),
-        transformer=Affine(),
+        transformer=transformer,
         cond_dim=config.embedding_dim,
         flow_layers=config.flow_layers,
         nn_width=config.nn_width,
